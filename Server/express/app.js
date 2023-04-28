@@ -1,10 +1,13 @@
-const   express   = require("express"),
-        cors      = require("cors"),
-        fs        = require("fs");
-const   app       = express();
+const   express       = require("express"),
+        cors          = require("cors"),
+        fs            = require("fs");
+const   app           = express();
+const   bodyParser    = require('body-parser')
 
 
 app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 /* Funcionalidad para nombrar las rutas como el directorio de */
 

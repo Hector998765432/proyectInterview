@@ -2,11 +2,7 @@ const express       = require("express");
 const router        = express.Router();
 const controller    = require("./controller");
 
-router.get("/", (_, res)=>{
-    res.status(200).send({
-        status: "success",
-        message: "Hola Mundo"
-    })
-})
+router.get("/", controller.getAll)
+router.post("/nuevo", controller.create)
 
 module.exports = router
