@@ -16,15 +16,14 @@ module.exports = {
       });
     }
   },
-  create: async ({body}, res) => {
-    console.log(body)
+  create: async ({ body }, res) => {
     try {
       const { telefono } = body;
 
       /* Checar si el usuario existe con el telefono */
       const existeUsuario = await Usuario.findOne({ telefono });
       if (existeUsuario) {
-        throw new Error('El Usuario ya existe');
+        throw new Error("El Usuario ya existe");
       }
 
       /* Crear Usuario */
