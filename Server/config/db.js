@@ -12,7 +12,7 @@ const conectarDB = async () => {
     } catch (error) {
         console.log('Error al conectar con la base de datos');
         console.log(error);
-        process.exit(1); // detener la app
+        process.exit(1); // Detiene la App si no es posible conectarse a la base de datos
     }
 }
 
