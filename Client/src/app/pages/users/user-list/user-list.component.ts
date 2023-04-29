@@ -1,34 +1,20 @@
-import { Component, OnInit  } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
 
-import { Store } from '@ngrx/store';
-
-import { userActionTypes } from  '../../../store/user.actions'
-import { selectUserState } from '../../../store/user.selectors'
-import { AppState } from 'src/app/store/reducers';
-import { UserService } from '../../../service/user.service';
-
-
-import { GeneralUsuario, Usuario } from 'src/app/models/user.model';
-
-
+import { invokeUsersAPI } from '../store/user.action'
+import {selectUsers} from '../store/user.selector'
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css']
+  styleUrls: ['./user-list.component.css'],
 })
 export class UserListComponent implements OnInit {
 
-  users$!: any
-
-  constructor(private UserService: UserService, private store: Store<AppState>){}
+  constructor(private store: Store) {}
+  users$ = this.store.pipe(select(selectUsers));
 
   ngOnInit() {
-    this.users$ = this.store.select(selectUserState)
-    
-    console.log(this.users$)
-    console.log("Hola")
+    this.store.dispatch(invokeUsersAPI())
   }
-
 }

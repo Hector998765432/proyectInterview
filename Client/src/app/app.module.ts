@@ -13,21 +13,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './store/reducers';
-import { EffectsModule } from '@ngrx/effects';
 import { CreateUserComponent } from './pages/users/create-user/create-user.component';
 import { UserListComponent } from './pages/users/user-list/user-list.component';
 import { UsersModule } from './pages/users/users.module';
-import { UsersResolver } from './pages/users/user.resolver';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 const routes = [
   {
     path: 'users',
-    component: UserListComponent,
-    resolve: {
-      courses: UsersResolver
-    }
+    component: UserListComponent
   },
   {path: 'create-user', component: CreateUserComponent},
   {path: '**', redirectTo: 'users'}
@@ -39,7 +34,6 @@ const routerConfig: ExtraOptions = {
 	scrollPositionRestoration: 'enabled',
 	useHash: true,
 }
-
 @NgModule({
   declarations: [
     AppComponent
@@ -54,12 +48,11 @@ const routerConfig: ExtraOptions = {
     IconsProviderModule,
     NzLayoutModule,
     NzMenuModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot({}),
     EffectsModule.forRoot([])
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
-    UsersResolver
   ],
   bootstrap: [AppComponent]
 })

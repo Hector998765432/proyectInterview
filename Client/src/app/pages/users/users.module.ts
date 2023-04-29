@@ -6,14 +6,14 @@ import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { UserEffects } from '../../store/user.effects'
+import {userReducer} from './store/user.reducer'
+import {UserEffect} from './store/user.effect'
+
 import { UserService } from '../../service/user.service'
-import { userReducer } from '../../store/user.reducers';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { UserListComponent } from './user-list/user-list.component'
 
 import { NzTableModule } from 'ng-zorro-antd/table';
-
 
 @NgModule({
   declarations: [
@@ -23,9 +23,9 @@ import { NzTableModule } from 'ng-zorro-antd/table';
   imports: [
     CommonModule,
     FormsModule,
-    StoreModule.forFeature('users', userReducer),
-    EffectsModule.forFeature([UserEffects]),
-    NzTableModule
+    NzTableModule,
+    StoreModule.forFeature('myusers', userReducer),
+    EffectsModule.forFeature([UserEffect])
   ],
   providers: [UserService]
 })

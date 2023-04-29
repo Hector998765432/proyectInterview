@@ -9,7 +9,3 @@ export interface Usuario{
     nacimiento: string
     _id: string
 }
-
-export interface GeneralUsuario<T>{
-    users: T
-}

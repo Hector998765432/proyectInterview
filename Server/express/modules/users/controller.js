@@ -4,11 +4,7 @@ module.exports = {
   getAll: async (_, res) => {
     try {
       const data = await Usuario.find({});
-      res.status(200).send({
-        status: "Success",
-        message: "Usuarios encontrados",
-        users: data,
-      });
+      res.status(200).send(data);
     } catch (error) {
       res.status(400).send({
         status: "Hubo un error en la consulta",

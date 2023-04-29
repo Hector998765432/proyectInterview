@@ -1,2 +1,1 @@
-
-{{this.users$}}
+<p *ngFor="let item of users$ | async">{{ item | json}}</p>
