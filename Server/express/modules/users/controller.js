@@ -7,7 +7,7 @@ module.exports = {
       res.status(200).send({
         status: "Success",
         message: "Usuarios encontrados",
-        data,
+        users: data,
       });
     } catch (error) {
       res.status(400).send({
