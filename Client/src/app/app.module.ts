@@ -1,24 +1,29 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
 import { ExtraOptions, RouterModule } from '@angular/router'
-import { AppComponent } from './app.component';
-import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { en_US } from 'ng-zorro-antd/i18n';
+import { BrowserModule } from '@angular/platform-browser';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { IconsProviderModule } from './icons-provider.module';
+
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+
+import { IconsProviderModule } from './icons-provider.module';
+
 import { CreateUserComponent } from './pages/users/create-user/create-user.component';
 import { UserListComponent } from './pages/users/user-list/user-list.component';
 import { UsersModule } from './pages/users/users.module';
+
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
+import { appReducer } from './shared/store/app.reducer';
+
+import { AppComponent } from './app.component';
 const routes = [
   {
     path: 'users',
@@ -48,7 +53,7 @@ const routerConfig: ExtraOptions = {
     IconsProviderModule,
     NzLayoutModule,
     NzMenuModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({ appState: appReducer }),
     EffectsModule.forRoot([])
   ],
   providers: [
