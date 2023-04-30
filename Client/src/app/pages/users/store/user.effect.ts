@@ -1,7 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
-import { EMPTY, map, mergeMap, switchMap, withLatestFrom } from 'rxjs';
+import {
+  EMPTY,
+  map,
+  mergeMap,
+  switchMap,
+  withLatestFrom,
+  catchError,
+  of,
+} from 'rxjs';
 
 import { UserService } from '../../../service/user.service';
 import {
@@ -9,6 +17,7 @@ import {
   usersGetSuccess,
   invokeNewUserAPI,
   saveNewUserAPISuccess,
+  saveNewUserError,
 } from './user.action';
 import { selectUsers } from './user.selector';
 import { Appstate } from 'src/app/shared/store/appstate';
@@ -53,7 +62,15 @@ export class UserEffect {
               })
             );
             return saveNewUserAPISuccess({ user: data });
-          })
+          }),
+          catchError((error) =>
+            of(
+              saveNewUserError({ error: error.error.message }),
+              setAPIStatus({
+                apiStatus: { apiResponseMessage: error.error.message, apiStatus: 'error' },
+              })
+            )
+          )
         );
       })
     );

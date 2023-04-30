@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Usuario } from '../../../models/user.model';
-import { usersGetSuccess, saveNewUserAPISuccess } from './user.action';
+import { usersGetSuccess, saveNewUserAPISuccess,saveNewUserError } from './user.action';
 
 export const initialState: ReadonlyArray<Usuario> = [];
 
@@ -11,7 +11,10 @@ export const userReducer = createReducer(
   }),
   on(saveNewUserAPISuccess, (state, { user }) => {
     let newState = [...state];
-    newState.unshift(user);
+    newState.push(user.data);
     return newState;
-  })
+  }),
+  on(saveNewUserError, (state, { error }) => {
+    return error;
+  }),
 );

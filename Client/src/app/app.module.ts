@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
@@ -24,6 +24,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { appReducer } from './shared/store/app.reducer';
 
 import { AppComponent } from './app.component';
+
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzNotificationModule } from 'ng-zorro-antd/notification'
 const routes = [
   {
     path: 'users',
@@ -54,10 +58,13 @@ const routerConfig: ExtraOptions = {
     NzLayoutModule,
     NzMenuModule,
     StoreModule.forRoot({ appState: appReducer }),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([]),
+    NzGridModule,
+    NzCardModule,
+    NzNotificationModule
   ],
   providers: [
-    { provide: NZ_I18N, useValue: en_US },
+    { provide: NZ_I18N, useValue: en_US }
   ],
   bootstrap: [AppComponent]
 })

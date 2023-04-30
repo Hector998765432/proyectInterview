@@ -1,1 +1,46 @@
-<p *ngFor="let item of users$ | async">{{ item | json}}</p>
+<button nz-button nzType="primary" (click)="newUserNavigation()">
+  Agregar Usuario <span nz-icon nzType="user-add" nzTheme="outline"></span>
+</button>
+
+<nz-divider></nz-divider>
+
+<nz-table [nzSimple]="true" [nzTemplateMode]="true" [nzScroll]="{ y: '50vh' }">
+  <thead>
+    <tr>
+      <th [nzAlign]="'center'">Nombre</th>
+      <th [nzAlign]="'center'">Epellido</th>
+      <th [nzAlign]="'center'">Edad</th>
+      <th [nzAlign]="'center'">Sexo</th>
+      <th [nzAlign]="'center'">Teléfono</th>
+      <th [nzAlign]="'center'">Embarazo / Lactancia</th>
+      <th [nzAlign]="'center'">Fecha de Nacimiento</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of users$ | async">
+      <td [nzAlign]="'center'">{{ item.nombre }}</td>
+      <td [nzAlign]="'center'">{{ item.apellido }}</td>
+      <td [nzAlign]="'center'">{{ item.edad }}</td>
+      <td [nzAlign]="'center'">
+        <span *ngIf="item.sexo" nz-icon nzType="man" nzTheme="outline"></span>
+        <span
+          *ngIf="!item.sexo"
+          nz-icon
+          nzType="woman"
+          nzTheme="outline"
+        ></span>
+      </td>
+      <td [nzAlign]="'center'">{{ item.telefono }}</td>
+      <td [nzAlign]="'center'">
+        <div [ngSwitch]="item.status">
+          <div *ngSwitchCase="0">
+            <span nz-icon nzType="close" nzTheme="outline"></span>
+          </div>
+          <div *ngSwitchCase="1">Lactancia</div>
+          <div *ngSwitchCase="2">Embarazo</div>
+        </div>
+      </td>
+      <td [nzAlign]="'center'">{{ item.nacimiento | date }}</td>
+    </tr>
+  </tbody>
+</nz-table>

@@ -9,3 +9,9 @@ export interface Usuario{
     nacimiento: string
     _id: string
 }
+
+export interface Respuesta{
+    data: Usuario,
+    message: string
+    status: string
+}

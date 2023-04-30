@@ -1,1 +1,139 @@
-<p>create-user works!</p>
+<button nz-button nzType="primary" (click)="newUserNavigation()">
+  Lista de Usuarios
+  <span nz-icon nzType="ordered-list" nzTheme="outline"></span>
+</button>
+
+<nz-divider></nz-divider>
+
+<nz-card
+  style="width: 50%; margin: 0 auto"
+  nzTitle="Formulario de Registro de Usuario"
+  [nzExtra]="extraTemplate"
+>
+  <form nz-form [formGroup]="userForm" (ngSubmit)="save()">
+    <!-- Nombre -->
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="nombre"
+        >Nombre</nz-form-label
+      >
+      <nz-form-control
+        [nzSm]="14"
+        [nzXs]="24"
+        nzErrorTip="El Nombre es obligatorio"
+      >
+        <input nz-input formControlName="nombre" id="nombre" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <!-- Apellido -->
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="apellido"
+        >Apellido</nz-form-label
+      >
+      <nz-form-control
+        [nzSm]="14"
+        [nzXs]="24"
+        nzErrorTip="El apellido es obligatorio"
+      >
+        <input nz-input formControlName="apellido" id="apellido" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <!-- Edad  -->
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="edad"
+        >Edad</nz-form-label
+      >
+      <nz-form-control
+        [nzSm]="14"
+        [nzXs]="24"
+        nzErrorTip="La edad es obligatoria"
+      >
+        <nz-input-number
+          formControlName="edad"
+          id="edad"
+          [nzMin]="1"
+          [nzMax]="99"
+          [nzStep]="1"
+        ></nz-input-number>
+      </nz-form-control>
+    </nz-form-item>
+
+    <!-- Sexo -->
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="sexo"
+        >Sexo</nz-form-label
+      >
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Dato Obligatorio">
+        <nz-radio-group formControlName="sexo">
+          <label nz-radio nzValue="true"
+            >Masculino <span nz-icon nzType="man" nzTheme="outline"></span
+          ></label>
+          <label nz-radio nzValue="false"
+            >Femenino <span nz-icon nzType="woman" nzTheme="outline"></span
+          ></label>
+        </nz-radio-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <!-- Teléfono -->
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="telefono" nzRequired
+        >Teléfono</nz-form-label
+      >
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Teléfono inválido!">
+        <input formControlName="telefono" id="telefono" nz-input />
+      </nz-form-control>
+    </nz-form-item>
+
+    <!-- Embarazo / Lactancia -->
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="status"
+        >Status</nz-form-label
+      >
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Dato Obligatorio">
+        <nz-radio-group
+          formControlName="status"
+          [nzDisabled]="userForm.value.sexo"
+        >
+          <label nz-radio nzValue="2">Embarazo</label>
+          <label nz-radio nzValue="1">Lactancia</label>
+        </nz-radio-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <!-- Fecha de Nacimiento -->
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired
+        >Fecha de Nacimiento</nz-form-label
+      >
+      <nz-form-control
+        [nzSm]="16"
+        [nzXs]="24"
+        nzErrorTip="Fecha de Nacimiento requerida"
+      >
+        <nz-date-picker formControlName="nacimiento"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+
+
+    <!-- Submit -->
+
+    <nz-form-item nz-row>
+      <nz-form-control [nzSpan]="14" [nzOffset]="6">
+        <button nz-button nzType="primary" [disabled]="this.userForm.invalid">Registrar</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-card>
+
+<ng-template #extraTemplate>
+  <span nz-icon nzType="paper-clip" nzTheme="outline"></span>
+</ng-template>
