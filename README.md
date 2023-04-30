@@ -14,3 +14,7 @@ Para correr la parte del servidor, en el directorio /Server hace falta agregar d
 
 NOTA: Para el puerto del API se recomienda utilizar el 3000, ya que el FrontEnd manda a llamar el mismo para las peticiones.
 
+## Instalación
+
+En ambos directorios /Server y /Cliente ejecutar `npm install` para la descarga de las dependencias.
+
